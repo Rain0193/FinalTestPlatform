@@ -2,14 +2,16 @@
 # @Author  : Eggsy
 
 import xadmin
+from testPlatform.Action import OpenReport, RunTest
 from xadmin import views
 from .models import TestCase
 
 
 class TestCaseAdmin(object):
-    list_display = ['case_id', 'case_name', 'case_step']
-    search_fields = ['case_id', 'case_name']
-    list_filter = ['case_id', 'case_name', 'case_step']
+    list_display = ['case_id', 'case_name', "test_file", 'class_name', 'test_method', 'test_report']
+    search_fields = ['case_name', 'class_name', 'test_method', 'test_file']
+    list_filter = ['case_name', 'class_name', 'test_method', 'test_file']
+    actions = [OpenReport, RunTest]
 
 
 class BaseSetting(object):

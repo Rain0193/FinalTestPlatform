@@ -1,0 +1,11 @@
+{
+  "收信":"//*[@id='navContainer']/div[1]/a[1]",
+  "写信":"//*[@id='navContainer']/div[1]/a[2]",
+  "已删除":"//*[@id='navFid_4']/span[2]/span",
+  "其他邮箱":"//*[@id='nav_pop_span']/span",
+  "欢迎页":"//*[@id='R_tabArea']/table[1]",
+  "确定":"//*[@id='dvDialogStyle']/div/div/div[3]/div/div/span",
+  "取消":"//*[@id='dvDialogStyle']/div/div/div[3]/div/div[2]/span",
+  "收件人":"//*[@id='InputEx_To']/div/input[1]",
+  "邮件正文":"/html/body"
+}
