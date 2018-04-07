@@ -5,9 +5,7 @@
 import os
 
 from django.template.response import TemplateResponse
-from selenium import webdriver
 
-from UITest.src.test.test_sendmail import SendMail
 from xadmin.plugins.actions import BaseActionView
 from UITest.src.utils.common import htmlrunner
 

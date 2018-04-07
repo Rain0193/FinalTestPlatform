@@ -12,6 +12,7 @@ class TestCase(models.Model):
     class_name = models.CharField(default='', max_length=50, verbose_name='所属测试类')
     test_method = models.CharField(default='', max_length=50, verbose_name='所属测试方法')
     test_file = models.CharField(default='', max_length=50, verbose_name='所属测试文件')
+    test_result = models.NullBooleanField(default=None, verbose_name='上次测试结果')
 
     class Meta:
         verbose_name = '测试用例'

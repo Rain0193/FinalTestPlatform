@@ -8,9 +8,9 @@ from .models import TestCase
 
 
 class TestCaseAdmin(object):
-    list_display = ['case_id', 'case_name', "test_file", 'class_name', 'test_method', 'test_report']
-    search_fields = ['case_name', 'class_name', 'test_method', 'test_file']
-    list_filter = ['case_name', 'class_name', 'test_method', 'test_file']
+    list_display = ['case_id', 'case_name', "test_file", 'class_name', 'test_method', 'test_report', 'test_result']
+    search_fields = ['case_name', 'class_name', 'test_method', 'test_file', 'test_result']
+    list_filter = ['case_name', 'class_name', 'test_method', 'test_file', 'test_result']
     actions = [OpenReport, RunTest]
 
 

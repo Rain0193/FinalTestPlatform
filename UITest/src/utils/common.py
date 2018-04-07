@@ -9,6 +9,7 @@ import datetime
 import time
 import sys
 import unittest
+import MySQLdb
 
 from UITest.src.utils.TestRunnerHTML import HTMLTestRunner
 
@@ -29,12 +30,21 @@ def htmlrunner(report_title, case_method):
     if not os.path.exists(report_path):
         os.makedirs(report_path)
     report_file = report_path + '\\' + report_title + nowtime + '.html'
+    path = ntime + '/' + report_title + nowtime + '.html'
+    write_report_to_db(path, 'test_report', report_title)
     testsuite = unittest.TestSuite()
     testsuite.addTest(unittest.defaultTestLoader.loadTestsFromName(case_method))
     print(testsuite)
     with open(report_file, 'wb') as report:
         runner = HTMLTestRunner(stream=report, title=report_title, description='desc')
-        runner.run(testsuite)
+        a = runner.run(testsuite)
+        print('a is ' + str(a))
+        testresult = str(a)
+        if testresult.__contains__('errors=0 failures=0'):
+            test_result = 1
+        else:
+            test_result = 0
+        write_report_to_db(test_result, 'test_result', report_title)
 
 
 # 获取截图
@@ -76,3 +86,16 @@ def logger(level, log_info):
         if lvl <= int(log_level) and bool(log_enable):
             log.write("%s %s %s %s:%s:%s %s\
 \n" % (log_time, log_pid, level, log_script, log_method, log_line, log_info))
+
+
+# 写入数据库
+def write_report_to_db(result, col_name, case_name):
+    db = MySQLdb.connect(host="localhost", user="root", password="1234", db="mysql", port=3306, charset="utf8")
+    cursor = db.cursor()
+    sql = 'update testplatform_testcase set %s = "%s" WHERE case_name = "%s"' % (col_name, result, case_name)
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except:
+        db.rollback()
+    db.close()
