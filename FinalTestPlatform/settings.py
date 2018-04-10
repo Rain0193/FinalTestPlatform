@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "testPlatform",
     'xadmin',
     'crispy_forms',
+    'basicData',
 ]
 
 MIDDLEWARE = [
