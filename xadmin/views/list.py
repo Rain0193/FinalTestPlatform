@@ -105,7 +105,7 @@ class ListAdminView(ModelAdminView):
     list_display_links = ()
     list_display_links_details = False
     list_select_related = None
-    list_per_page = 50
+    list_per_page = 10
     list_max_show_all = 200
     list_exclude = ()
     search_fields = ()

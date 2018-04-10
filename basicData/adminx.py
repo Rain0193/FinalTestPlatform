@@ -2,7 +2,7 @@
 # @Author  : Eggsy
 
 import xadmin
-from .models import Element
+from .models import Element, Steps
 
 
 class ElementAdmin(object):
@@ -11,4 +11,12 @@ class ElementAdmin(object):
     list_filter = ['element_name', "access_method", 'access_path', 'frame_name']
     # actions = [OpenReport, RunTest]
 
+
+class StepsAdmin(object):
+    list_display = ['step_des', 'element_name', 'actions', 'parameter', 'wait_time']
+    search_fields = ['step_des', 'actions', 'parameter',]
+    list_filter = ['step_des', 'actions', 'parameter',]
+
 xadmin.site.register(Element, ElementAdmin)
+xadmin.site.register(Steps, StepsAdmin)
+
