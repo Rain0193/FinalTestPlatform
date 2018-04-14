@@ -1,3 +1,4 @@
+pymysql
 ddt
 selenium
 django==1.11.0

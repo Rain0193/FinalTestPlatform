@@ -5,12 +5,13 @@ from django.db import models
 
 class Element(models.Model):
     SHIRT_SIZES = (
-        ('1', 'id'),
-        ('2', 'xpath'),
+        ('id', 'id'),
+        ('xpath', 'xpath'),
+        ('link', 'link'),
     )
     element_name = models.CharField(max_length=30, verbose_name='元素名称')
     access_method = models.CharField(max_length=10, choices=SHIRT_SIZES, verbose_name='获取方式')
-    access_path = models.CharField(max_length=100, verbose_name='获取值')
+    access_path = models.CharField(null=True, blank=True, max_length=100, verbose_name='获取值')
     frame_name = models.CharField(default='default', max_length=30, verbose_name='所在frame')
 
     class Meta:
@@ -23,16 +24,16 @@ class Element(models.Model):
 
 class Steps(models.Model):
     Actions = (
-        ('1', '点击'),
-        ('2', '填写'),
-        ('3', '切换'),
-        ('4', '选择'),
-        ('5', '上传'),
-        ('6', '检查'),
+        ('点击', '点击'),
+        ('填写', '填写'),
+        ('切换', '切换'),
+        ('选择', '选择'),
+        ('上传', '上传'),
+        ('检查', '检查'),
     )
     step_des = models.CharField(max_length=100, default='', verbose_name='步骤描述')
     element_name = models.ForeignKey(Element, null=True, blank=True, verbose_name='元素名称')
-    actions = models.CharField(max_length=1, choices=Actions, verbose_name='执行动作')
+    actions = models.CharField(max_length=2, choices=Actions, verbose_name='执行动作')
     parameter = models.CharField(max_length=100, null=True, blank=True,  default='', verbose_name='参数')
     wait_time = models.IntegerField(null=True, blank=True, verbose_name='执行完等待时间')
 
