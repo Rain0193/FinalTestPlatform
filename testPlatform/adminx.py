@@ -26,7 +26,7 @@ class BaseSetting(object):
 class GlobalSetting(object):
     site_title = "测试用例管理系统"
     site_footer = "Copyright 2018 Eggsy"
-    # menu_style = "accordion"
+    menu_style = "accordion"
 
 
 xadmin.site.register(views.CommAdminView, GlobalSetting)

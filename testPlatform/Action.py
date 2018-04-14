@@ -39,4 +39,3 @@ class RunTest(BaseActionView):
             default_path = 'UITest.src.test.'
             case = default_path + obj.test_file + '.' + obj.class_name + '.' + obj.test_method + '_' + obj.case_id + '_' + obj.case_name
             htmlrunner(obj.case_name, case)
-
