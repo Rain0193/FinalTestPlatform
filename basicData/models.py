@@ -11,7 +11,7 @@ class Element(models.Model):
     )
     element_name = models.CharField(max_length=30, verbose_name='元素名称')
     access_method = models.CharField(max_length=10, choices=SHIRT_SIZES, verbose_name='获取方式')
-    access_path = models.CharField(null=True, blank=True, max_length=100, verbose_name='获取值')
+    access_path = models.CharField(default='None', max_length=100, verbose_name='获取值')
     frame_name = models.CharField(default='default', max_length=30, verbose_name='所在frame')
 
     class Meta:
@@ -35,7 +35,7 @@ class Steps(models.Model):
     element_name = models.ForeignKey(Element, null=True, blank=True, verbose_name='元素名称')
     actions = models.CharField(max_length=2, choices=Actions, verbose_name='执行动作')
     parameter = models.CharField(max_length=100, null=True, blank=True,  default='', verbose_name='参数')
-    wait_time = models.IntegerField(null=True, blank=True, verbose_name='执行完等待时间')
+    wait_time = models.IntegerField(default=1, verbose_name='执行完等待时间')
 
     class Meta:
         verbose_name = '步骤'

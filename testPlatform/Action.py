@@ -36,6 +36,6 @@ class RunTest(BaseActionView):
 
     def do_action(self, queryset):
         for obj in queryset:
-            default_path = 'UITest.src.test.'
-            case = default_path + obj.test_file + '.' + obj.class_name + '.' + obj.test_method + '_' + obj.case_id + '_' + obj.case_name
+            default_path = 'UITest.src.test.test_emailcase.SHUMail.test_emailcase_'
+            case = default_path + str(obj.id) + '_' + obj.case_name
             htmlrunner(obj.case_name, case)

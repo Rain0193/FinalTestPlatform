@@ -8,14 +8,12 @@ from .models import TestCase
 
 
 class TestCaseAdmin(object):
-    list_display = ['case_id', 'case_name', 'steps', "test_file", 'class_name', 'test_method', 'test_report', 'test_result']
-    search_fields = ['case_name', 'class_name', 'test_method', 'test_file', 'test_result', 'steps']
-    list_filter = ['case_name', 'class_name', 'test_method', 'test_file', 'test_result', 'steps']
+    list_display = ['id', 'case_name', 'steps', 'test_report', 'test_result']
+    search_fields = ['case_name', 'test_result', 'steps', 'test_result']
+    list_filter = ['case_name', 'test_result', 'steps', 'test_result']
     actions = [OpenReport, RunTest]
-    # filter_horizontal = ['steps']
-    # style_fields = {'steps': 'm2m_transfer'}
     readonly_fields = ['test_report', 'test_result']
-    list_editable = ['case_name', 'steps', "test_file", 'class_name', 'test_method']
+    list_editable = ['case_name', 'steps']
 
 
 class BaseSetting(object):
