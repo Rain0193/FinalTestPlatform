@@ -23,5 +23,6 @@ from testPlatform import views as testplatform_view
 urlpatterns = [
     url(r'^$', testplatform_view.index),
     url(r'^admin/', xadmin.site.urls),
-    url(r'^admin/report', testplatform_view.reprot)
+    url(r'^admin/report', testplatform_view.reprot),
+    url(r'^admin/run_all_test', testplatform_view.run_all_test)
 ]

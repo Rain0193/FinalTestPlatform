@@ -35,7 +35,9 @@
   {% endfor %}
 </div>
 <input type='hidden' id='_portal_key' value='{{ portal_key }}' />
+    <button type="button" onclick="location='run_all_test'" class="btn btn-primary">运行所有测试</button>
+{#    <a href="run_all_test">运行所有测试</a>#}
+    <a href="report">最近的测试报告</a>
     <iframe src="report" width="1550" height="900" scrolling="no" frameborder="0">
     </iframe>
-    <a href="report">最近的测试报告</a>
 {% endblock %}
