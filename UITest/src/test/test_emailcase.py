@@ -13,7 +13,7 @@ def getCaseName():
     # 查询数据库的方法
     db = pymysql.connect(host="localhost", user="root", password="1234", db="mysql", port=3306, charset="utf8")
     cur = db.cursor()
-    sql = "SELECT `case_name` FROM testplatform_testcase ;"
+    sql = "SELECT `case_name`, `id` FROM testplatform_testcase ;"
     cur.execute(sql)
     results = cur.fetchall()
     db.commit()
@@ -26,7 +26,7 @@ def getCaseName():
 class SHUMail(WebUITest):
     @data(*getCaseName())
     @unpack
-    def test_emailcase(self, data):
+    def test_emailcase(self, case_name, case_id):
         driver = GetElement(self.driver)
         GetElement.CaseName = self._testMethodName
-        driver.ui_engine(data)
+        driver.ui_engine(case_name, case_id)

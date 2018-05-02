@@ -53,7 +53,7 @@ class WebUITest(unittest.TestCase):
         GetElement.password = password
         GetElement.casetime = datetime.datetime.now().strftime("_%Y%m%d%H%M%S")
         try:
-            self.driver.find_element_by_xpath("//*[@id='R_tabArea']/table[1]").click()
+            self.driver.find_element_by_xpath("//*[@id='navContainer']/div[1]/a[1]")
         except:
             self.driver.get(url)
             login(self.driver, username, password)

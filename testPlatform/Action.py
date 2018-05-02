@@ -37,5 +37,5 @@ class RunTest(BaseActionView):
     def do_action(self, queryset):
         for obj in queryset:
             default_path = 'UITest.src.test.test_emailcase.SHUMail.test_emailcase_'
-            case = default_path + str(obj.id) + '_' + obj.case_name
+            case = default_path + str(obj.id) + '_' + obj.case_name + str(obj.id)
             htmlrunner(obj.case_name, case)

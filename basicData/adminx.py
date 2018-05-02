@@ -2,7 +2,7 @@
 # @Author  : Eggsy
 
 import xadmin
-from .models import Element, Steps
+from .models import Element, Steps, StepsForCases
 
 
 class ElementAdmin(object):
@@ -17,6 +17,13 @@ class StepsAdmin(object):
     search_fields = ['step_des', 'actions', 'parameter',]
     list_filter = ['step_des', 'actions', 'parameter',]
 
+
+class StepsForCasesAdmin(object):
+    list_display = ['case_name', 'step_name', 'execution_order']
+    search_fields = ['case_name', 'step_name']
+    list_filter = ['case_name']
+
 xadmin.site.register(Element, ElementAdmin)
 xadmin.site.register(Steps, StepsAdmin)
+xadmin.site.register(StepsForCases, StepsForCasesAdmin)
 

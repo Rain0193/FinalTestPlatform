@@ -19,8 +19,9 @@
 
 {% block nav_btns %}
 {% if has_add_widget_permission %}
-  <a title="{% trans "Add Widget" %}" href="{{ add_widget_url }}" class="btn btn-primary">
-    <i class="fa fa-plus"></i> <span>{% trans "Add Widget" %}</span></a>
+{#  <a title="{% trans "Add Widget" %}" href="{{ add_widget_url }}" class="btn btn-primary">#}
+{#    <i class="fa fa-plus"></i> <span>{% trans "Add Widget" %}</span></a>#}
+     <button type="button" onclick="location='run_all_test'" class="btn btn-primary">运行所有测试</button>
 {% endif %}
 {% endblock %}
 
@@ -35,9 +36,86 @@
   {% endfor %}
 </div>
 <input type='hidden' id='_portal_key' value='{{ portal_key }}' />
-    <button type="button" onclick="location='run_all_test'" class="btn btn-primary">运行所有测试</button>
+    <div class="view">
+        <div class="jumbotron" contenteditable="false">
+            <h1>自动化测试用例管理系统</h1>
+            <p>
+                这是一个基于上海大学新邮箱的自动化UI测试配置管理系统，只需几项简单的操作，你就能实现对上海大学邮箱的自动化UI测试，快来试试吧！
+            </p>
+            <p>
+                <a class="btn btn-primary btn-large" href="http://localhost:8000/admin/testPlatform/testcase/">开始配置</a>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <div class="caption" contenteditable="false">
+                    <h4>今日新增用例数</h4>
+                    <h1>
+                        1
+                    </h1>
+                </div></div>
+        </div>
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <div class="caption" contenteditable="false">
+                    <h4>今日运行用例数</h4>
+                    <h1>
+                        2
+                    </h1>
+                </div>
+            </div></div>
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <div class="caption" contenteditable="false">
+                    <h4>今日测试通过</h4>
+                    <h1>
+                        2
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <div class="caption" contenteditable="false">
+                    <h4>今日测试通过</h4>
+                    <h1>
+                        2
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-8">
+            <div class="progress">
+	            <div class="progress-bar progress-bar-success" role="progressbar"
+		            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+		            style="width: 90%;">
+                    90% 通过
+	            </div>
+            </div>
+            <div class="progress">
+	            <div class="progress-bar progress-bar-info" role="progressbar"
+		            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+		             style="width: 30%;">
+                    30%通过
+	        </div>
+            </div>
+    </div>
+    <div class="col-md-4">
+<a href="report">点击我查看最新的测试报告</a>
+        <a href="report">点击我查看最新的测试报告</a>
+
+    </div>
+
+
 {#    <a href="run_all_test">运行所有测试</a>#}
-    <a href="report">最近的测试报告</a>
-    <iframe src="report" width="1550" height="900" scrolling="no" frameborder="0">
-    </iframe>
+
+
+
+{#    <iframe src="report" width="1550" height="900" scrolling="no" frameborder="0">#}
+{#    </iframe>#}
 {% endblock %}

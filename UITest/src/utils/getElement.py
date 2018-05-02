@@ -37,12 +37,12 @@ class GetElement(unittest.TestCase):
     def find_element(self, *loc):
         return self.driver.find_element(*loc)
 
-    def getCaseStepIDs(self, case_name):
+    def getCaseStepIDs(self, case_id):
         db = pymysql.connect(host="localhost", user="root", password="1234", db="mysql", port=3306, charset="utf8")
         cur = db.cursor()
-        sql = "SELECT `steps` FROM testplatform_testcase WHERE case_name = '%s';" % case_name
+        sql = "SELECT step_name_id FROM basicdata_stepsforcases WHERE id in (SELECT stepsforcases_id FROM testplatform_testcase_steps WHERE testcase_id = '%s') ORDER BY execution_order asc" % case_id
         cur.execute(sql)
-        results = cur.fetchall()[0][0]
+        results = cur.fetchall()
         db.commit()
         cur.close()
         db.close()
@@ -59,9 +59,12 @@ class GetElement(unittest.TestCase):
         db.close()
         return results
 
-    def ui_engine(self, case_name):
-        step_ids = self.getCaseStepIDs(case_name)
-        for step_id in step_ids.split(","):
+    def ui_engine(self, case_name, case_id):
+        result = self.getCaseStepIDs(case_id)
+        lenghth = len(result)
+        result1 = result
+        for i in range(lenghth):
+            step_id = result1[i][0]
             result = self.getCaseStep(step_id)
             action = result[0]
             element = result[1], result[2], result[3]
