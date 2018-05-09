@@ -38,7 +38,7 @@ class GetElement(unittest.TestCase):
         return self.driver.find_element(*loc)
 
     def getCaseStepIDs(self, case_id):
-        db = pymysql.connect(host="localhost", user="root", password="1234", db="mysql", port=3306, charset="utf8")
+        db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
         cur = db.cursor()
         sql = "SELECT step_name_id FROM basicdata_stepsforcases WHERE id in (SELECT stepsforcases_id FROM testplatform_testcase_steps WHERE testcase_id = '%s') ORDER BY execution_order asc" % case_id
         cur.execute(sql)
@@ -49,7 +49,7 @@ class GetElement(unittest.TestCase):
         return results
 
     def getCaseStep(self, id):
-        db = pymysql.connect(host="localhost", user="root", password="1234", db="mysql", port=3306, charset="utf8")
+        db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
         cur = db.cursor()
         sql = "SELECT `actions`, `parameter`, `element_name_id`, `wait_time`, `step_des` FROM basicdata_steps WHERE id = '%s';" % id
         cur.execute(sql)
@@ -185,7 +185,7 @@ class GetElement(unittest.TestCase):
             assert False, "Element %s is not found!" % element_name_id
 
     def get_element(self, id):
-        db = pymysql.connect(host="localhost", user="root", password="1234", db="mysql", port=3306, charset="utf8")
+        db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
         cur = db.cursor()
         sql = "SELECT `element_name`, `access_method`, `access_path`, `frame_name` FROM basicdata_element WHERE id = '%s';" % id
         cur.execute(sql)

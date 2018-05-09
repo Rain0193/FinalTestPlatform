@@ -48,7 +48,7 @@ class Steps(models.Model):
 class StepsForCases(models.Model):
     case_name = models.CharField(max_length=50, verbose_name='用例名称')
     step_name = models.ForeignKey(Steps, verbose_name='步骤描述')
-    execution_order = models.IntegerField(verbose_name='执行顺序', unique=True)
+    execution_order = models.IntegerField(verbose_name='执行顺序')
 
     class Meta:
         verbose_name = '用例步骤配置'

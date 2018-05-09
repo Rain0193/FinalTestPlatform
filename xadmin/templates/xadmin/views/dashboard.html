@@ -27,6 +27,91 @@
 
 {% block content %}
 <div class="dashboard row">
+    <div class="col-sm-12 column ui-sortable">
+        <div class="panel panel-default widget html" id="1">
+          <div class="panel-heading"><i class="icon chevron fa-chevron-up fa"></i>
+      <h3 class="panel-title">
+          <i class="icon fa fa-wrench pull-right" data-toggle="modal" data-target="#1-opts-form"></i>
+          <i class="fa fa-file-o"></i>
+          Get Started
+      </h3></div>
+          <div class="panel-body " style="display: block;">
+              <h3> 自动化测试用例管理系统 </h3><p>这是一个基于上海大学新邮箱的自动化UI测试配置管理系统，只需几项简单的操作，你就能实现对上海大学邮箱的自动化UI测试，快来试试吧！ <br><br>Contact me : 464063606</p>
+          </div>
+      </div>
+    </div>
+    <div class="col-sm-6 column ui-sortable">
+        <div class="panel panel-default widget qbutton" id="3">
+              <div class="panel-heading"><i class="icon fa fa-chevron-up chevron"></i><h3 class="panel-title">
+                  <i class="icon fa fa-wrench pull-right" data-toggle="modal" data-target="#4-opts-form"></i>
+                  <i class="fa fa-caret-square-o-right"></i>
+                  Quick Start
+              </h3></div>
+              <div class="panel-body ">
+                  <div class="row">
+                      <div class="col-xs-6 col-sm-4 col-md-3">
+                          <a href="/admin/basicData/element/" class="btn btn-primary btn-quick">
+                              <i class="fa fa-laptop"></i>
+                              <p>元素</p>
+                          </a>
+                      </div>
+                      <div class="col-xs-6 col-sm-4 col-md-3">
+                            <a href="/admin/basicData/steps/" class="btn btn-primary btn-quick">
+                              <i class="fa fa-cloud"></i>
+                              <p>步骤</p>
+                            </a>
+                            </div>
+                      <div class="col-xs-6 col-sm-4 col-md-3">
+                            <a href="/admin/testPlatform/testcase" class="btn btn-primary btn-quick">
+                              <i class="fa fa-rocket"></i>
+                              <p>用例</p>
+                            </a>
+                            </div>
+                      <div class="col-xs-6 col-sm-4 col-md-3">
+                            <a href="/admin/basicData/stepsforcases/" class="btn btn-primary btn-quick">
+                              <i class="fa fa-coffee"></i>
+                              <p>用例步骤配置</p>
+                            </a>
+                            </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+        <div class="col-sm-6 column ui-sortable">
+          <div class="panel panel-default widget list" id="2">
+            <div class="panel-heading"><i class="icon fa fa-chevron-up chevron"></i><h3 class="panel-title">
+                <i class="icon fa fa-wrench pull-right" data-toggle="modal" data-target="#3-opts-form"></i>
+{#                <a href="/app/host/?o=-guarantee_date" class="pull-right"><span class="badge badge-info">0</span></a>#}
+                <i class="fa fa-align-justify"></i>
+                测试报告
+            </h3>
+            </div>
+            <div class="panel-body ">
+{#                <span class="text-muted">空列表</span>#}
+                <a href="report">点击我查看最新的测试报告</a>
+            </div>
+            <div class="modal fade widget_options" tabindex="-1" role="dialog" id="3-opts-form" aria-hidden="true" style="display: none;">
+                <div class="modal-content">
+                    <form method="post" class="box-form form-horizontal short_label widget-form exform rended">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="wqBxqJFizKtP1YhyPJPLBF4qzU98NgqHUqidmVkZo0qkt3tIciHiu6Xy8MlTjRsA">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">小组件设置项</h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            {% csrf_token %}
+                            <a class="btn btn-danger pull-left btn-remove">删除</a>
+                            <a class="btn btn-default" data-dismiss="modal">关闭</a>
+                            <input class="btn btn-primary" type="submit" value="保存变更">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
   {% for c in columns %}
   <div class="{{ c.0 }} column">
     {% for widget in c.1 %}
@@ -34,88 +119,8 @@
     {% endfor %}
   </div>
   {% endfor %}
+
 </div>
+
 <input type='hidden' id='_portal_key' value='{{ portal_key }}' />
-    <div class="view">
-        <div class="jumbotron" contenteditable="false">
-            <h1>自动化测试用例管理系统</h1>
-            <p>
-                这是一个基于上海大学新邮箱的自动化UI测试配置管理系统，只需几项简单的操作，你就能实现对上海大学邮箱的自动化UI测试，快来试试吧！
-            </p>
-            <p>
-                <a class="btn btn-primary btn-large" href="http://localhost:8000/admin/testPlatform/testcase/">开始配置</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="thumbnail">
-                <div class="caption" contenteditable="false">
-                    <h4>今日新增用例数</h4>
-                    <h1>
-                        1
-                    </h1>
-                </div></div>
-        </div>
-        <div class="col-md-3">
-            <div class="thumbnail">
-                <div class="caption" contenteditable="false">
-                    <h4>今日运行用例数</h4>
-                    <h1>
-                        2
-                    </h1>
-                </div>
-            </div></div>
-        <div class="col-md-3">
-            <div class="thumbnail">
-                <div class="caption" contenteditable="false">
-                    <h4>今日测试通过</h4>
-                    <h1>
-                        2
-                    </h1>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="thumbnail">
-                <div class="caption" contenteditable="false">
-                    <h4>今日测试通过</h4>
-                    <h1>
-                        2
-                    </h1>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col-md-8">
-            <div class="progress">
-	            <div class="progress-bar progress-bar-success" role="progressbar"
-		            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-		            style="width: 90%;">
-                    90% 通过
-	            </div>
-            </div>
-            <div class="progress">
-	            <div class="progress-bar progress-bar-info" role="progressbar"
-		            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-		             style="width: 30%;">
-                    30%通过
-	        </div>
-            </div>
-    </div>
-    <div class="col-md-4">
-<a href="report">点击我查看最新的测试报告</a>
-        <a href="report">点击我查看最新的测试报告</a>
-
-    </div>
-
-
-{#    <a href="run_all_test">运行所有测试</a>#}
-
-
-
-{#    <iframe src="report" width="1550" height="900" scrolling="no" frameborder="0">#}
-{#    </iframe>#}
 {% endblock %}

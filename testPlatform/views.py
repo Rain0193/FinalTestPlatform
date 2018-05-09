@@ -10,6 +10,7 @@ from django.http import HttpResponse
 
 from UITest.src.test.test_emailcase import SHUMail
 from UITest.src.utils.TestRunnerHTML import HTMLTestRunner
+from testPlatform.models import TestCase
 
 
 def index(request):
@@ -47,3 +48,9 @@ def run_all_test(request):
         runner = HTMLTestRunner(stream=report, title=report_title, description='desc')
         runner.run(testsuite)
     return render(request, report_file)
+
+
+def show_cases(request):
+    case_list = TestCase.objects.all()
+    return render(request, {'case_list': case_list})
+
