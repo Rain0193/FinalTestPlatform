@@ -9,7 +9,7 @@ import datetime
 import time
 import sys
 import unittest
-import MySQLdb
+import pymysql
 
 from UITest.src.utils.TestRunnerHTML import HTMLTestRunner
 
@@ -90,7 +90,7 @@ def logger(level, log_info):
 
 # 写入数据库
 def write_report_to_db(result, col_name, case_name):
-    db = MySQLdb.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
+    db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
     cursor = db.cursor()
     sql = 'update testplatform_testcase set %s = "%s" WHERE case_name = "%s"' % (col_name, result, case_name)
     try:

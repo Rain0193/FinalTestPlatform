@@ -20,7 +20,6 @@ class StepsAdmin(object):
 
 class StepsForCasesAdmin(object):
     list_display = ['case_name', 'step_name', 'execution_order']
-    search_fields = ['case_name', 'step_name']
     list_filter = ['case_name']
 
 xadmin.site.register(Element, ElementAdmin)

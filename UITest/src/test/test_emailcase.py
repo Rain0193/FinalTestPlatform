@@ -13,7 +13,7 @@ def getCaseName():
     # 查询数据库的方法
     db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
     cur = db.cursor()
-    sql = "SELECT `case_name`, `id` FROM testplatform_testcase ;"
+    sql = "SELECT `case_name`, `id` FROM testplatform_testcase;"
     cur.execute(sql)
     results = cur.fetchall()
     db.commit()
