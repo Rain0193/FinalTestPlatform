@@ -2,7 +2,7 @@
 # @Author  : Eggsy
 
 import xadmin
-from .models import Element, Steps, StepsForCases
+from .models import Element, Steps, StepsForCases, DataDriven
 
 
 class ElementAdmin(object):
@@ -22,7 +22,13 @@ class StepsForCasesAdmin(object):
     list_display = ['case_name', 'step_name', 'execution_order']
     list_filter = ['case_name']
 
+
+class DataDrivenAdmin(object):
+    list_display = ['case_name', 'data']
+    list_filter = ['case_name', 'data']
+
 xadmin.site.register(Element, ElementAdmin)
 xadmin.site.register(Steps, StepsAdmin)
 xadmin.site.register(StepsForCases, StepsForCasesAdmin)
+xadmin.site.register(DataDriven, DataDrivenAdmin)
 

@@ -57,3 +57,14 @@ class StepsForCases(models.Model):
     def __str__(self):
         return self.case_name
 
+
+class DataDriven(models.Model):
+    case_name = models.CharField(max_length=50, verbose_name='用例名称')
+    data = models.TextField(max_length=500, verbose_name='数据')
+
+    class Meta:
+        verbose_name = '数据驱动'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.case_name+str(self.id)

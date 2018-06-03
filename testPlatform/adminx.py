@@ -5,7 +5,7 @@ import xadmin
 from basicData.models import Element, Steps, StepsForCases
 from testPlatform.Action import OpenReport, RunTest
 from xadmin import views
-from .models import TestCase
+from .models import TestCase, TestCaseForDataDriven
 
 
 class MainDashboard(object):
@@ -36,6 +36,17 @@ class TestCaseAdmin(object):
     style_fields = {'steps': 'm2m_transfer'}
 
 
+class TestCaseForDataDrivenAdmin(object):
+    list_display = ['id', 'case_name', 'test_report', 'test_result','data']
+    search_fields = ['case_name', 'test_result', 'data']
+    list_filter = ['case_name', 'test_result', 'data']
+    # actions = [OpenReport, RunTest]
+    readonly_fields = ['test_report', 'test_result']
+    list_editable = ['case_name']
+    filter_horizontal = ['steps', 'data']
+    style_fields = {'steps': 'm2m_transfer', 'data': 'm2m_transfer'}
+
+
 class BaseSetting(object):
     enable_themes = True
     use_bootswatch = True
@@ -54,3 +65,4 @@ xadmin.site.register(views.CommAdminView, GlobalSetting)
 xadmin.site.register(views.IndexView, MainDashboard)
 xadmin.site.register(views.BaseAdminView, BaseSetting)
 xadmin.site.register(TestCase, TestCaseAdmin)
+xadmin.site.register(TestCaseForDataDriven, TestCaseForDataDrivenAdmin)
