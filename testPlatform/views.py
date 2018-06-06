@@ -8,6 +8,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
+from UITest.src.test.test_datadriven import DataDriven
 from UITest.src.test.test_emailcase import SHUMail
 from UITest.src.utils.TestRunnerHTML import HTMLTestRunner
 from testPlatform.models import TestCase
@@ -43,6 +44,7 @@ def run_all_test(request):
     report_file = report_path + '\\' + report_title + nowtime + '.html'
     testsuite = unittest.TestSuite()
     testsuite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(SHUMail))
+    testsuite.addTest(unittest.defaultTestLoader.loadTestsFromTestCase(DataDriven))
     print(testsuite)
     with open(report_file, 'wb') as report:
         runner = HTMLTestRunner(stream=report, title=report_title, description='desc')

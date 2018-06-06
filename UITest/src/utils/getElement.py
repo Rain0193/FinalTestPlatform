@@ -48,6 +48,17 @@ class GetElement(unittest.TestCase):
         db.close()
         return results
 
+    def getDataDrivenCaseStepIDs(self, case_id):
+        db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
+        cur = db.cursor()
+        sql = "SELECT step_name_id FROM basicdata_stepsforcases WHERE id in (SELECT stepsforcases_id FROM testplatform_testcasefordatadriven_steps WHERE testcasefordatadriven_id = '%s') ORDER BY execution_order asc" % case_id
+        cur.execute(sql)
+        results = cur.fetchall()
+        db.commit()
+        cur.close()
+        db.close()
+        return results
+
     def getCaseStep(self, id):
         db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
         cur = db.cursor()
@@ -59,15 +70,31 @@ class GetElement(unittest.TestCase):
         db.close()
         return results
 
-    def ui_engine(self, case_name, case_id):
-        result = self.getCaseStepIDs(case_id)
+    def getTestData(self, data_id):
+        db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
+        cur = db.cursor()
+        sql = "SELECT `data` FROM basicdata_datadriven WHERE id = '%s';" % data_id
+        cur.execute(sql)
+        results = cur.fetchall()[0][0]
+        db.commit()
+        cur.close()
+        db.close()
+        return results
+
+    def ui_engine(self, case_id, case_name, data_id):
+        test_data = ''
+        if data_id == '0':
+            result = self.getCaseStepIDs(case_id)
+        else:
+            result = self.getDataDrivenCaseStepIDs(case_id)
+            test_data = self.getTestData(data_id)
         lenghth = len(result)
         result1 = result
         for i in range(lenghth):
             step_id = result1[i][0]
             result = self.getCaseStep(step_id)
             action = result[0]
-            element = result[1], result[2], result[3]
+            element = result[1], result[2], result[3], test_data
             logger("INFO", "CaseStep is %s" % result[4])
             # 点击操作
             if action == "点击":
@@ -103,13 +130,22 @@ class GetElement(unittest.TestCase):
         parameter = element[0]
         element_name_id = element[1]
         wait_time = element[2]
+        test_data = element[3]
+        result = self.get_element(element_name_id)
+        element_name = result[0]
+        if parameter == '参数':
+            parameter = test_data.split(element_name+":")[1].split("&")[0]
         self.fill_input_box(element_name_id, parameter)
         time.sleep(wait_time)
 
     # 处理检查操作
     def check_value(self, element):
         parameter = element[0]
+        element_name_id = element[1]
         wait_time = element[2]
+        test_data = element[3]
+        if parameter.find('参数') != -1:
+            parameter = parameter.replace('参数', test_data.split("检查:")[1].split("&")[0])
         if parameter.find(u"不存在") != -1:
             val = parameter.split(u"不存在:")
             for v in val[1].split(","):

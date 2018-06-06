@@ -1,7 +1,8 @@
-# @Time    : 2018/4/15 16:16
+# @Time    : 2018/6/6 9:12
 # @Author  : Eggsy
-# @File    : test_emailcase.py
+# @File    : test_datadriven.py
 # @Software: PyCharm
+import unittest
 
 import pymysql
 from ddt import ddt, data, unpack
@@ -13,7 +14,7 @@ def getCaseName():
     # 查询数据库的方法
     db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
     cur = db.cursor()
-    sql = "SELECT `case_name`, `id` FROM testplatform_testcase;"
+    sql = "SELECT a.id, `case_name` ,`datadriven_id` FROM testplatform_testcasefordatadriven AS a, testplatform_testcasefordatadriven_data as b WHERE a.id = b.testcasefordatadriven_id;"
     cur.execute(sql)
     results = cur.fetchall()
     db.commit()
@@ -23,10 +24,11 @@ def getCaseName():
 
 
 @ddt
-class SHUMail(WebUITest):
+class DataDriven(WebUITest):
     @data(*getCaseName())
     @unpack
-    def test_emailcase(self, case_name, case_id):
+    def test_datadriven(self, case_id, case_name, data_id):
+        pass
         driver = GetElement(self.driver)
         GetElement.CaseName = self._testMethodName
-        driver.ui_engine(case_id, case_name, '0')
+        driver.ui_engine(case_id, case_name, data_id)

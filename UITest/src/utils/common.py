@@ -23,7 +23,7 @@ def getconfig(section, key):
 
 
 # 通过HTMLRunner执行用例
-def htmlrunner(report_title, case_method):
+def htmlrunner(report_title, case_method, case_methods, type):
     ntime = datetime.datetime.now().strftime("%Y%m%d")
     nowtime = datetime.datetime.now().strftime("_%Y%m%d%H%M%S")
     report_path = os.path.dirname(os.path.realpath(__file__)).replace('\\src\\utils', '\\report\\') + ntime
@@ -31,9 +31,13 @@ def htmlrunner(report_title, case_method):
         os.makedirs(report_path)
     report_file = report_path + '\\' + report_title + nowtime + '.html'
     path = ntime + '/' + report_title + nowtime + '.html'
-    write_report_to_db(path, 'test_report', report_title)
     testsuite = unittest.TestSuite()
-    testsuite.addTest(unittest.defaultTestLoader.loadTestsFromName(case_method))
+    if type == 0:
+        write_report_to_db(path, 'test_report', report_title)
+        testsuite.addTest(unittest.defaultTestLoader.loadTestsFromName(case_method))
+    else:
+        write_data_driven_report_to_db(path, 'test_report', report_title)
+        testsuite.addTest(unittest.defaultTestLoader.loadTestsFromNames(case_methods))
     print(testsuite)
     with open(report_file, 'wb') as report:
         runner = HTMLTestRunner(stream=report, title=report_title, description='desc')
@@ -44,7 +48,10 @@ def htmlrunner(report_title, case_method):
             test_result = 1
         else:
             test_result = 0
-        write_report_to_db(test_result, 'test_result', report_title)
+        if type == 0:
+            write_report_to_db(test_result, 'test_result', report_title)
+        else:
+            write_data_driven_report_to_db(test_result, 'test_result', report_title)
 
 
 # 获取截图
@@ -93,6 +100,18 @@ def write_report_to_db(result, col_name, case_name):
     db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
     cursor = db.cursor()
     sql = 'update testplatform_testcase set %s = "%s" WHERE case_name = "%s"' % (col_name, result, case_name)
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except:
+        db.rollback()
+    db.close()
+
+
+def write_data_driven_report_to_db(result, col_name, case_name):
+    db = pymysql.connect(host="localhost", user="root", password="1234", db="django_platform", port=3306, charset="utf8")
+    cursor = db.cursor()
+    sql = 'update testplatform_testcasefordatadriven set %s = "%s" WHERE case_name = "%s"' % (col_name, result, case_name)
     try:
         cursor.execute(sql)
         db.commit()
